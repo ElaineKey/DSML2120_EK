@@ -23,7 +23,7 @@ FUN_FACTS = [
 ]
 
 
-PHOTO_PATH = "your_photo.jpg"  # Put a file in repo root or set a URL
+PHOTO_PATH = "assets/picture.jpg"  # Put a file in repo root or set a URL
 
 
 def find_photo(filename=PHOTO_PATH):
