@@ -36,11 +36,17 @@ st.caption(f"Last refreshed at: {time.strftime('%H:%M:%S')}")
 
 #view main
 st.subheader("Temperature")
-df = get_weather()
+
+if "history" not in st.session_state:
+    st.session_state.history = pd.DataFrame(columns=["time", "temperature", "wind"])
+
+new = get_weather()
+st.session_state.history = pd.concat([st.session_state.history, new]).drop_duplicates(subset="time")
+df = st.session_state.history
 
 st.dataframe(df, use_container_width=True)
-
 fig = px.line(df, x="time", y="temperature", markers=True, title="Temperature over time (°C)")
+st.plotly_chart(fig, use_container_width=True)
 st.plotly_chart(fig, use_container_width=True)
 
 #if refresh wait and then rerun the app.
